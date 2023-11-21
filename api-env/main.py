@@ -76,7 +76,7 @@ class UserResponse(BaseModel):
     id: int
     user_name: str
     mail: str
-    password: str
+    password: str = None
 
 class TaskBase(BaseModel):
     name: str
@@ -95,6 +95,14 @@ class TaskUpdate(BaseModel):
     id_user: int = None 
     
 
+
+# Operación para verificar si un usuario ya existe
+@app.get("/users/exists/{user_name}", response_model=UserResponse)
+def check_user_exists(user_name: str, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.user_name == user_name).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return UserResponse(id=user.id, user_name=user.user_name, mail=user.mail, password=user.password)
 # Operaciones CRUD para User
 @app.post("/users/", response_model=UserResponse)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
@@ -110,7 +118,12 @@ def read_user(user_name: str, db: Session = Depends(get_db)):
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return UserResponse(id=user.id, user_name=user.user_name, mail=user.mail, password=user.password)
-
+@app.get("/users/byId/{user_id}", response_model=UserResponse)
+def read_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return UserResponse(id=user.id, user_name=user.user_name, mail=user.mail, password=user.password)
 @app.put("/users/{user_id}", response_model=UserResponse)
 def update_user(user_id: int, user: UserCreate, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.id == user_id).first()
@@ -124,7 +137,7 @@ def update_user(user_id: int, user: UserCreate, db: Session = Depends(get_db)):
 
     db.commit()
     db.refresh(db_user)
-    return UserResponse(id=db_user.id, user_name=db_user.user_name, mail=db_user.mail)
+    return UserResponse(id=db_user.id, user_name=db_user.user_name, mail=db_user.mail, password=db_user.password)
 
 @app.delete("/users/{user_id}", response_model=UserResponse)
 def delete_user(user_id: int, db: Session = Depends(get_db)):

@@ -57,7 +57,7 @@ $(document).ready(function () {
                     inputTask.val('');
                 },
                 error: function (error) {
-                    console.error('Error al agregar la tarea:', error);
+                    
                 },
             });
         }
@@ -85,7 +85,7 @@ $(document).ready(function () {
                     taskItem.find('.task-name').text(data.name);
                 },
                 error: function (error) {
-                    console.error('Error al actualizar el nombre de la tarea:', error);
+                   
                 },
             });
         }
@@ -107,7 +107,7 @@ $(document).ready(function () {
                 taskItem.remove();
             },
             error: function (error) {
-                console.error('Error al eliminar la tarea:', error);
+                
             },
         });
     });
@@ -115,7 +115,7 @@ $(document).ready(function () {
     // Resto del código para manejar clics en el botón de marcar como completada, etc.
 });
 
-// Función para agregar una tarea a la lista
+
 // Función para agregar una tarea a la lista
 function appendTaskToList(task) {
     const taskList = $('.ul-task');
@@ -152,7 +152,7 @@ function appendTaskToList(task) {
                 location.reload();
             },
             error: function (error) {
-                console.error('Error al cambiar el estado de la tarea:', error);
+                
             },
         });
     });

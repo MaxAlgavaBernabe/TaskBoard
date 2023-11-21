@@ -11,7 +11,7 @@ function getUserByUserName() {
     fetch(`http://127.0.0.1:8000/users/${userName}`)
     .then(response => response.json())
     .then(data => {
-        console.log('Información del usuario:', data);
+        
         
         // Verificar si la información del usuario es correcta
         if (data && data.password === password.value) {
@@ -22,11 +22,11 @@ function getUserByUserName() {
             window.location.href = '/pages/dashboard.html';
         } else {
             // Mostrar un mensaje de error si la información no es correcta
-            apiResult.innerHTML = 'Nombre de usuario o contraseña incorrectos';
+            apiResult.innerHTML = 'Username or password incorrect';
         }
     })
     .catch((error) => {
-        console.error('Error al obtener información del usuario:', error);
+        
     });
 }
 
