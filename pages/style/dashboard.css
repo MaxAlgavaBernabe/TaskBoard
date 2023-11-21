@@ -32,16 +32,18 @@ main {
 }
 
 .box-task {
-    width: 925px;
+    width: 95%;
+    max-width: 925px;
     height: 700px;
-    margin: 4% 0 0 0;
+    margin: 4% auto 0;
     flex-shrink: 0;
     background: #332D14;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 .input-task {
-    width: 655px;
+    width: 80%;
+    max-width: 655px;
     height: 55px;
     color: #000000;
     font-size: 200%;
@@ -80,16 +82,14 @@ main {
 }
 
 .ul-task {
-    padding: 5;
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    max-height: 500px;
+    width: 95%;
+    max-height: 53vh;
     overflow-y: auto;
-    overflow-x: auto;
+    overflow-x: hidden;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     -ms-overflow-style: none;
+    border: none;
 }
 
 .ul-task::-webkit-scrollbar {
@@ -101,10 +101,9 @@ main {
 }
 
 .li-task {
-    width: 587px;
-    height: 59px;
-    padding: 0px 2%;
-    margin: 2%;
+    width: 85%;
+    height: 55px;
+    margin: 2% 0;
     border-radius: 15px;
     background: #EBD98D;
     box-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.69);
@@ -135,4 +134,21 @@ main {
 
 .fa-trash-can:hover {
     color: rgb(231, 67, 55);
+}
+
+@media only screen and (max-width: 768px) {
+    .box-task {
+        width: 95%;
+        max-width: 100%;
+    }
+
+    .input-task {
+        width: 90%;
+        max-width: 100%;
+    }
+
+    .ul-task {
+        width: 95%;
+        max-height: 66vh;
+    }
 }
