@@ -29,7 +29,7 @@ class Task(Base):
     id_user = Column(Integer, ForeignKey("user.id"))
 
 # Configurar conexión a la base de datos
-DATABASE_URL = "mysql+pymysql://task:task@localhost:3306/task_db"
+DATABASE_URL = "mysql+pymysql://user:pasword@localhost:3306/dataBase_name"
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
